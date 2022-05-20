@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./DBstyle.css">
+    <title>Student Database</title>
+</head>
+<body>
+    <div id="header">
+        <nav>
+            <ul>
+                <li id="b1"></li>
+                <li id="b2"></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="container"></div>
+</body>
+</html>
+
+<script>
+
+    let arr = JSON.parse(localStorage.getItem("allStudents")) || [];
+
+    let deletedStudent = JSON.parse(localStorage.getItem("trash")) || [];
+
+    let batch1 = 0, batch2 = 0;
+
+    // Display Students
+    function displayStudents(arr) {
+        const container = document.getElementById("container");
+
+        arr.map(function(elem,idx) {
+            let box = document.createElement("div");
+            box.setAttribute("class","box");
+// Images
+            let img = document.createElement("img");
+            img.src = elem.imgUrl;
+
+// Name
+            let name = document.createElement("h2");
+            name.textContent = elem.name;
+//  Course
+            let course = document.createElement("h3");
+            course.textContent = elem.course;
+// Unit
+            let unit = document.createElement("h3");
+            unit.textContent = elem.unit;
+// Batch
+            let batch = document.createElement("h3");
+            batch.textContent = elem.batch;
+            
+            // Batch selection
+
+            let b1 =  document.getElementById("b1");
+            let b2 = document.getElementById("b2");
+           
+            
+          
+           
+            
+            if(elem.batch === "1") {
+                b1.innerHTML = null;
+                batch1++;
+                b1.innerText = `Batch1 total students - ${batch1}`;
+            } if(elem.batch === "2") {
+                b2.innerHTML = null;
+                batch2++;
+                b2.innerText = `Batch2 total students - ${batch2}`;
+            }
+            console.log(elem.batch)
+
+// Button
+            let btn = document.createElement("button");
+            btn.textContent = "Remove";
+            btn.setAttribute("class","btn");
+
+            box.append(img,name,course,unit,batch,btn);
+            container.append(box);
+
+
+            btn.addEventListener("click", function() {
+                remove(elem,idx, elem.batch);
+
+            })
+        });
+
+        
+    }
+    displayStudents(arr);
+    
+    
+    // Remove Function
+    function remove(elem, idx, batch) {
+            let b1 =  document.getElementById("b1");
+            let b2 = document.getElementById("b2");
+           
+            // Batch selection
+            if(batch === "1") {
+                b1.innerHTML = null;
+                batch1--;
+                b1.innerText =`Batch1 total students - ${batch1}`;
+            } if(elem.batch === "2") {
+                b2.innerHTML = null;
+                batch2--;
+                b2.innerText = `Batch2 total students - ${batch2}`;
+            }
+
+        deletedStudent.push(elem);
+
+        localStorage.setItem("trash",JSON.stringify(deletedStudent));
+
+        arr.splice(idx,1);
+        localStorage.setItem("allStudents",JSON.stringify(arr));
+        window.location.reload();
+    }
+</script>

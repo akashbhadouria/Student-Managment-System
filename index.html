@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+
+    <title>Student Managment System</title>
+</head>
+<body>
+    
+<div class="formDiv">
+    <form onsubmit="formVal(event)" id="form">
+        <input type="text" id="name" placeholder="name">
+        <br><br>
+        <input type="text" id="course" placeholder="course">
+        <br><br>
+        <input type="text" id="unit" placeholder="unit">
+        <br><br>
+        <input type="url" id="img" placeholder="imageUrl">
+        <br><br>
+        <label for="batch">Batch</label>
+        <select name="batch" id="batch">
+            <option value="1">Batch 1</option>
+            <option value="2">Batch 2</option>
+        </select>
+        <br><br>
+
+        <input type="submit" value="Submit" id="submit">
+    </form>
+</div>
+
+
+    <a href="./database.html" id="students"> Students</a>
+</body>
+</html>
+
+<script src="./main.js"></script>
